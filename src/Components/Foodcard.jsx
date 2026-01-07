@@ -1,9 +1,28 @@
-import React from 'react'
+  import React from "react";
 
-function Foodcard() {
-  return (
-    <div>Foodcard</div>
-  )
-}
+  function Foodcard({ item, handleAdd }) {
+    const handleAddToCart = () => {
+      const isLoggedIn = localStorage.getItem("loggedIn");
 
-export default Foodcard
+      if (!isLoggedIn) {
+        alert("Please login to add items.");
+        return;
+      }
+
+      handleAdd(item);
+    };
+
+    return (
+      <div className="food-card">
+        <img src={item.image} alt={item.name} />
+        <h3>{item.name}</h3>
+        <p>₹{item.price}</p>
+
+        <button onClick={handleAddToCart} className="add-btn">
+          Add to Cart
+        </button>
+      </div>
+    );
+  }
+
+  export default Foodcard; 
